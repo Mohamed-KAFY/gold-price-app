@@ -3,6 +3,7 @@ import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 from datetime import datetime
+from zoneinfo import ZoneInfo  # مهم جداً
 import altair as alt
 
 # إعداد الصفحة
@@ -72,8 +73,9 @@ try:
 
     df = pd.DataFrame(data, columns=["الصنف", "سعر البيع", "سعر الشراء"])
 
-    # عرض توقيت التحميل
-    timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    # التوقيت المحلي لمصر
+    cairo_time = datetime.now(ZoneInfo("Africa/Cairo"))
+    timestamp = cairo_time.strftime('%Y-%m-%d %H:%M:%S')
     st.success(f"📅 تم جلب البيانات من الموقع في: {timestamp} (هذا ليس وقت التحديث الفعلي لأسعار الذهب)")
 
     st.dataframe(df, use_container_width=True)
