@@ -71,9 +71,11 @@ try:
             data.append([cols[0].text.strip(), cols[1].text.strip(), ""])
 
     df = pd.DataFrame(data, columns=["الصنف", "سعر البيع", "سعر الشراء"])
-    timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-    st.success(f"📅 آخر تحديث: {timestamp}")
+    # عرض توقيت التحميل
+    timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    st.success(f"📅 تم جلب البيانات من الموقع في: {timestamp} (هذا ليس وقت التحديث الفعلي لأسعار الذهب)")
+
     st.dataframe(df, use_container_width=True)
 
     # --- آلة حاسبة ---
